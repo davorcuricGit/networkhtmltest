@@ -183,8 +183,8 @@ canvas.addEventListener('wheel',function(e){
   var factor=e.deltaY<0?1.12:1/1.12;
   var wo=toWo(e.clientX,e.clientY);
   cam.zoom=Math.max(0.05,Math.min(50,cam.zoom*factor));
-  cam.x=wo[0]-(e.clientX-canvas.width/2)/cam.zoom;
-  cam.y=wo[1]-(e.clientY-canvas.height/2)/cam.zoom;
+  cam.x=(e.clientX-canvas.width/2)/cam.zoom-wo[0];
+  cam.y=(e.clientY-canvas.height/2)/cam.zoom-wo[1];
   draw();
 },{passive:false});
 
@@ -212,8 +212,8 @@ canvas.addEventListener('touchmove',function(e){
     var mx=(a.clientX+b.clientX)/2,my=(a.clientY+b.clientY)/2;
     var wo=toWo(mx,my);
     cam.zoom=Math.max(0.05,Math.min(50,cam.zoom*factor));
-    cam.x=wo[0]-(mx-canvas.width/2)/cam.zoom;
-    cam.y=wo[1]-(my-canvas.height/2)/cam.zoom;
+    cam.x=(mx-canvas.width/2)/cam.zoom-wo[0];
+    cam.y=(my-canvas.height/2)/cam.zoom-wo[1];
     for(var i=0;i<e.touches.length;i++){var t=e.touches[i];touches[t.identifier]={x:t.clientX,y:t.clientY};}
     draw();return;
   }
